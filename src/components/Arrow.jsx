@@ -7,6 +7,9 @@ export function Arrow({source, ammount}) {
   const click = () => {
     if (progress + ammount < 0) {
       setProgress(0)
+    }
+    else if (progress + ammount > 2000){
+      setProgress(2000)
     } else {
       setProgress(progress+ammount)
       console.log(progress)
