@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Cup from '../components/Cup.astro'
+import {Progress} from '../components/ProgressVar.jsx';
+
+import { Image } from 'astro:assets';
+
+import fiveHundredMl from "../assets/500ml.svg"
+import twoHundredMl from '../assets/200ml.svg'
+import threeHundredFiveMl from '../assets/350ml.svg'
+import config from '../assets/config.svg'
+
+---
+
+<Layout title="The Ultimate Water Website">
+	<div id="app" class="relative h-screen p-2 gap-2">
+		<header id="header" class="[grid-area:header] min-h-[50px]">
+			<div class="image w-8 mr-2">
+				<a href="#"><Image src={config} alt="config"></Image></a>
+			</div>
+		</header>
+		<aside class="[grid-area:aside] overflow-y-auto flex flex-row items-center justify-center">
+			<h2 id="yd" class=" text-7xl flex flex-col text-white">
+				<span>YOUR</span>
+				<span>DAILY</span>
+			</h2>
+			<div class="medidor flex flex-col items-center">
+				<div class="top"><h3 class="text-4xl text-white pb-5">2l</h3></div>
+				<div class="mid">
+					<Progress client:visible/>
+				</div>
+				<div class="low"><p class="text-4xl pt-4">😢😭</p></div>
+			</div>
+		</aside>
+		<main class="[grid-area:main]">
+			<ul class="">
+				<Cup img={fiveHundredMl} ammount={500}/>
+				<Cup img={twoHundredMl} ammount={200}/>
+				<Cup img={threeHundredFiveMl} ammount={350}/>
+			</ul>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	#app{
+		display: grid;
+		grid-template-areas: 
+			"header header header"
+			"aside main main";
+		grid-template-columns: 1fr 2fr;
+		grid-template-rows: auto 1fr;
+	}
+	#header{
+		display: flex;
+		flex-direction: row-reverse;
+		align-items: center;
+		
+	}
+
+	main{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	main ul{
+		list-style: none;
+		text-decoration: none;
+		display: flex;
+		flex-direction: row;
+		gap: 5px;
+	}
+	#yd{
+		font-family: 'Livvic', sans-serif;
+		font-weight: bold;
+	}
+	.medidor{
+		font-family: 'Livvic', sans-serif;
+		font-weight: bold;
+	}
+</style>
